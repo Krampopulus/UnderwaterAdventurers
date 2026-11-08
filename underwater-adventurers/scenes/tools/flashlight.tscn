@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3ky1lxi0lw5g"]
 
-[ext_resource type="Script" uid="uid://b264envanip48" path="res://flashlight_item.gd" id="1_gkipb"]
+[ext_resource type="Script" uid="uid://bsa78yh855gnr" path="res://scripts/objects/equipment_item.gd" id="1_gkipb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ldju7"]
 height = 0.5
@@ -24,7 +24,9 @@ mesh = SubResource("CylinderMesh_jmxmh")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=366727529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2754556)
+visible = false
 light_color = Color(0, 0.67058825, 1, 1)
-light_energy = 4.485
-light_size = 0.268
-spot_angle = 59.26
+light_energy = 7.812
+light_size = 0.387
+spot_range = 7.547
+spot_angle = 66.39

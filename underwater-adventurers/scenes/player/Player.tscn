@@ -27,3 +27,6 @@ light_color = Color(0.17507479, 0.7388113, 0.86622894, 1)
 light_energy = 2.584
 spot_range = 22.857
 spot_angle = 65.85
+
+[node name="EquipmentSlot" type="Marker3D" parent="Camera3D" unique_id=782919366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.2, -0.5)

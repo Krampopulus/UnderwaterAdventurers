@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b4ecuorb1mtbd"]
 
+[ext_resource type="Script" uid="uid://cgwgnbax6o3ap" path="res://scripts/objects/loot_item.gd" id="1_jv7t4"]
 [ext_resource type="Texture2D" uid="uid://g582ondy8o0n" path="res://docs/icon.svg" id="1_mbvju"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uhb48"]
@@ -11,6 +12,9 @@ albedo_texture = ExtResource("1_mbvju")
 
 [node name="HeavyObject" type="RigidBody3D" unique_id=244161260]
 mass = 50.0
+script = ExtResource("1_jv7t4")
+legacy_weight = 50.0
+base_value = 500.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1163232707]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
