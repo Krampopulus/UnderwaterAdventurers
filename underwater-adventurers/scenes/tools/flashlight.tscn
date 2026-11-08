@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://3ky1lxi0lw5g"]
+
+[ext_resource type="Script" uid="uid://b264envanip48" path="res://flashlight_item.gd" id="1_gkipb"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ldju7"]
+height = 0.5
+radius = 0.15
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jmxmh"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.5
+
+[node name="Flashlight" type="RigidBody3D" unique_id=275641190]
+script = ExtResource("1_gkipb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=585011788]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ldju7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=827558371]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_jmxmh")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=366727529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2754556)
+light_color = Color(0, 0.67058825, 1, 1)
+light_energy = 4.485
+light_size = 0.268
+spot_angle = 59.26

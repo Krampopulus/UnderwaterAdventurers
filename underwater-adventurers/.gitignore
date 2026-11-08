@@ -1,0 +1,14 @@
+# Godot generated files
+.godot/
+
+# Exported builds
+builds/
+exports/
+
+# Temporary files
+*.tmp
+*.bak
+
+# Operating system
+.DS_Store
+Thumbs.db

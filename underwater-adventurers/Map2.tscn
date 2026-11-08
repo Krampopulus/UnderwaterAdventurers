@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://coc0ghlmw0maj"]
+
+[ext_resource type="PackedScene" uid="uid://04tb6qq0oj12" path="res://StartRoom.tscn" id="1_ql6pm"]
+[ext_resource type="PackedScene" uid="uid://tx3hoh4xyx8b" path="res://Corridor_Straight.tscn" id="2_k8vv2"]
+[ext_resource type="PackedScene" uid="uid://bkvk8hnyjmrjh" path="res://LootRoom.tscn" id="3_gipgj"]
+[ext_resource type="PackedScene" uid="uid://bullxuc6mijg" path="res://Corridor_Corner.tscn" id="4_wq7yg"]
+[ext_resource type="PackedScene" uid="uid://dff2qaebbt7dt" path="res://scenes/player/Player.tscn" id="5_gipgj"]
+[ext_resource type="PackedScene" uid="uid://c6m5gsbo3fq8w" path="res://лутовая4пути.tscn" id="5_wq7yg"]
+
+[node name="Прототип карты" type="Node3D" unique_id=2143112266]
+
+[node name="Стартовая комната" parent="." unique_id=1189936419 instance=ExtResource("1_ql6pm")]
+
+[node name="Коридор прямой" parent="." unique_id=1651986206 instance=ExtResource("2_k8vv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2.5, -17.5)
+
+[node name="Лутовая" parent="." unique_id=1699952553 instance=ExtResource("3_gipgj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -35)
+
+[node name="Коридор угловой" parent="." unique_id=1998197749 instance=ExtResource("4_wq7yg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 27, -2.5, -52.5)
+
+[node name="Лутовая2" parent="." unique_id=867642890 instance=ExtResource("5_wq7yg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 0, -63)
+
+[node name="Player" parent="." unique_id=1173662127 instance=ExtResource("5_gipgj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3560638, -2.8295288, 3.089796)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=774227663]
+transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 17.490166, 27.748037, -31.54374)
+light_color = Color(1, 1, 0, 1)
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_specular = 0.0
+shadow_enabled = true
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=360919069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+light_color = Color(0.613202, 0.00027646302, 0.6131976, 1)
+light_energy = 2.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+area_range = 13.433
+area_attenuation = 0.5

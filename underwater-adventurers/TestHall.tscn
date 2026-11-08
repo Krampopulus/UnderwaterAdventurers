@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://kcd7kot7r87b"]
+
+[ext_resource type="PackedScene" uid="uid://c56d4ebij26hd" path="res://Map/Map1.tscn" id="1_vnr52"]
+[ext_resource type="PackedScene" uid="uid://cqqupkaewkvvk" path="res://scenes/objects/25kg.tscn" id="2_p2y76"]
+[ext_resource type="PackedScene" uid="uid://baorxqjhcl5lx" path="res://scenes/objects/drop_zone.tscn" id="3_dqv23"]
+[ext_resource type="PackedScene" uid="uid://b4ecuorb1mtbd" path="res://scenes/objects/HeavyObject.tscn" id="4_t5pmx"]
+[ext_resource type="PackedScene" uid="uid://diixfu1rk31ks" path="res://scenes/objects/TestCylinder.tscn" id="5_rufkj"]
+[ext_resource type="PackedScene" uid="uid://c2tpg6unpbu3v" path="res://scenes/objects/TestObject.tscn" id="6_oaqp2"]
+[ext_resource type="PackedScene" uid="uid://b7uo11o174hmu" path="res://scenes/objects/TestSphere.tscn" id="7_ne0f2"]
+[ext_resource type="PackedScene" uid="uid://dff2qaebbt7dt" path="res://scenes/player/Player.tscn" id="8_ot2e1"]
+
+[node name="TestHall" type="Node3D" unique_id=938165031]
+
+[node name="Зал" parent="." unique_id=2089111507 instance=ExtResource("1_vnr52")]
+
+[node name="RigidBody3D" parent="." unique_id=255952546 instance=ExtResource("2_p2y76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 1, 0)
+
+[node name="RigidBody3D2" parent="." unique_id=1625902593 instance=ExtResource("2_p2y76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -38)
+
+[node name="DropZone" parent="." unique_id=1979937504 instance=ExtResource("3_dqv23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 1, 1)
+
+[node name="HeavyObject" parent="." unique_id=244161260 instance=ExtResource("4_t5pmx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5.5, 0.5)
+
+[node name="TestCylinder" parent="." unique_id=1437208872 instance=ExtResource("5_rufkj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, 9.5, 15.5)
+
+[node name="Loot_Small_1kg" parent="." unique_id=1332988793 instance=ExtResource("6_oaqp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 7, 0.5)
+
+[node name="TestSphere" parent="." unique_id=1581645196 instance=ExtResource("7_ne0f2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.5, 9, 0.5)
+
+[node name="TestSphere2" parent="." unique_id=2014988191 instance=ExtResource("7_ne0f2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 9, 0.5)
+
+[node name="Player" parent="." unique_id=1173662127 instance=ExtResource("8_ot2e1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 35)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=26786296]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5, 25, 0.5)
+light_energy = 4.255
+spot_range = 44.348152
+spot_angle = 59.0625

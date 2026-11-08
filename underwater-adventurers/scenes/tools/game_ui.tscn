@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bgnexoh0y2h22"]
+
+[ext_resource type="Script" uid="uid://ctaxwmlbjdfwi" path="res://game_ui.gd" id="1_6v4yd"]
+
+[node name="GameUI" type="CanvasLayer" unique_id=1122234598]
+script = ExtResource("1_6v4yd")
+
+[node name="Control" type="Control" parent="." unique_id=1004897083]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScoreLabel" type="Label" parent="Control" unique_id=1835123368]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TooltipLabel" type="Label" parent="Control" unique_id=1871590296]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 249.0
+offset_right = 524.0
+offset_bottom = 272.0

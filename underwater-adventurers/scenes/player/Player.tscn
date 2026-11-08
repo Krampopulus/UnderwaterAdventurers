@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dff2qaebbt7dt"]
+
+[ext_resource type="Script" uid="uid://itqvt6xgsp2b" path="res://scripts/player/player_controller.gd" id="1_wr5hl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhb48"]
+radius = 0.4
+height = 1.6
+
+[node name="Player" type="CharacterBody3D" unique_id=1173662127]
+script = ExtResource("1_wr5hl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=635410830]
+shape = SubResource("CapsuleShape3D_uhb48")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=4688769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="VacuumRay" type="RayCast3D" parent="Camera3D" unique_id=159514793]
+target_position = Vector3(0, 0, -4)
+
+[node name="HoldPoint" type="Marker3D" parent="Camera3D" unique_id=1976978605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=1595646745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075318396, 0.035161734, 0)
+light_color = Color(0.17507479, 0.7388113, 0.86622894, 1)
+light_energy = 2.584
+spot_range = 22.857
+spot_angle = 65.85

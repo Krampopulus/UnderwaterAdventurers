@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dg3rvcjdadxgn"]
+
+[ext_resource type="Script" uid="uid://ckwv1bwh1g7vo" path="res://echo_scanner.gd" id="1_tng8x"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uhb48"]
+height = 0.3
+radius = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jmxmh"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.3
+
+[node name="EchoScanner" type="RigidBody3D" unique_id=1095990011]
+script = ExtResource("1_tng8x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1841093115]
+shape = SubResource("CylinderShape3D_uhb48")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1695669471]
+mesh = SubResource("CylinderMesh_jmxmh")

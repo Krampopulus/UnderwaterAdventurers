@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b4ecuorb1mtbd"]
+
+[ext_resource type="Texture2D" uid="uid://g582ondy8o0n" path="res://docs/icon.svg" id="1_mbvju"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uhb48"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jv7t4"]
+albedo_texture = ExtResource("1_mbvju")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ldju7"]
+
+[node name="HeavyObject" type="RigidBody3D" unique_id=244161260]
+mass = 50.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1163232707]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_uhb48")
+debug_color = Color(0.37674236, 0.51296264, 0.889315, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2047534986]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jv7t4")
+mesh = SubResource("BoxMesh_ldju7")

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b7uo11o174hmu"]
+
+[ext_resource type="Script" uid="uid://cgwgnbax6o3ap" path="res://scripts/objects/loot_item.gd" id="1_e6bj3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uhb48"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85lfg"]
+albedo_color = Color(0.6376442, 0.3904785, 2.8878452e-07, 1)
+metallic_specular = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_ldju7"]
+
+[node name="TestSphere" type="RigidBody3D" unique_id=1581645196]
+mass = 4.0
+script = ExtResource("1_e6bj3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=723551573]
+shape = SubResource("SphereShape3D_uhb48")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1937881316]
+material_override = SubResource("StandardMaterial3D_85lfg")
+mesh = SubResource("SphereMesh_ldju7")

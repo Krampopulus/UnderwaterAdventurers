@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c2tpg6unpbu3v"]
+
+[ext_resource type="Script" uid="uid://cgwgnbax6o3ap" path="res://scripts/loot_item.gd" id="1_vrp7g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ldju7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrp7g"]
+albedo_color = Color(1, 0.08627451, 0.20392157, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pomll"]
+material = SubResource("StandardMaterial3D_vrp7g")
+
+[node name="Loot_Small_1kg" type="RigidBody3D" unique_id=1332988793]
+script = ExtResource("1_vrp7g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1957823154]
+shape = SubResource("BoxShape3D_ldju7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1241216509]
+mesh = SubResource("BoxMesh_pomll")

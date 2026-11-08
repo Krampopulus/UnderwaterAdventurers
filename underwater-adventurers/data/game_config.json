@@ -1,0 +1,6 @@
+{
+  "cart_max_capacity": 6,
+  "cart_hold_time": 1.0,
+  "manipulator_max_mass": 10.0,
+  "default_loot_value_multiplier": 15.0
+}

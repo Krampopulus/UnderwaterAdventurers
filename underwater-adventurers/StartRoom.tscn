@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://04tb6qq0oj12"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onhxh"]
+albedo_color = Color(0, 0.60120547, 0, 1)
+
+[node name="Node3D" type="Node3D" unique_id=541071610]
+
+[node name="Стартовая комната" type="CSGBox3D" parent="." unique_id=45883066]
+material_override = SubResource("StandardMaterial3D_onhxh")
+operation = 1
+use_collision = true
+size = Vector3(20, 10, 20)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Стартовая комната" unique_id=607798009]
+operation = 2
+size = Vector3(19.8, 9.8, 19.8)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Стартовая комната" unique_id=620352981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -3.4, -10)
+operation = 2
+size = Vector3(4, 3, 1)
+
+[node name="Marker3D" type="Marker3D" parent="Стартовая комната" unique_id=1160847516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2.5, -10)
