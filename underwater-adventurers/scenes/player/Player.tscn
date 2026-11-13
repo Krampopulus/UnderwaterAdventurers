@@ -1,13 +1,31 @@
 [gd_scene format=3 uid="uid://dff2qaebbt7dt"]
 
 [ext_resource type="Script" uid="uid://itqvt6xgsp2b" path="res://scripts/player/player_controller.gd" id="1_wr5hl"]
+[ext_resource type="PackedScene" uid="uid://bgnexoh0y2h22" path="res://scenes/tools/game_ui.tscn" id="2_gfjak"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhb48"]
+albedo_color = Color(0, 0.9814436, 0.83851165, 1)
+emission_enabled = true
+emission = Color(0.11372549, 0.79607844, 0.65882355, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ldju7"]
+material = SubResource("StandardMaterial3D_uhb48")
+top_radius = 0.02
+bottom_radius = 0.04
+height = 1.0
+radial_segments = 8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uhb48"]
 radius = 0.4
 height = 1.6
 
-[node name="Player" type="CharacterBody3D" unique_id=1173662127]
+[node name="Player" type="CharacterBody3D" unique_id=1173662127 node_paths=PackedStringArray("game_ui_reference")]
 script = ExtResource("1_wr5hl")
+game_ui_reference = NodePath("GameUI")
+
+[node name="GrabBeam" type="MeshInstance3D" parent="." unique_id=2033898799]
+mesh = SubResource("CylinderMesh_ldju7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=635410830]
 shape = SubResource("CapsuleShape3D_uhb48")
@@ -15,18 +33,17 @@ shape = SubResource("CapsuleShape3D_uhb48")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=4688769]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
-[node name="VacuumRay" type="RayCast3D" parent="Camera3D" unique_id=159514793]
-target_position = Vector3(0, 0, -4)
+[node name="VacuumRay" type="RayCast3D" parent="Camera3D" unique_id=1005875431]
+target_position = Vector3(0, 0, -10)
 
 [node name="HoldPoint" type="Marker3D" parent="Camera3D" unique_id=1976978605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=1595646745]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.075318396, 0.035161734, 0)
-light_color = Color(0.17507479, 0.7388113, 0.86622894, 1)
-light_energy = 2.584
-spot_range = 22.857
-spot_angle = 65.85
-
 [node name="EquipmentSlot" type="Marker3D" parent="Camera3D" unique_id=782919366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.2, -0.5)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=891042496]
+spot_range = 8.899
+spot_angle = 7.15
+
+[node name="GameUI" parent="." unique_id=1122234598 instance=ExtResource("2_gfjak")]

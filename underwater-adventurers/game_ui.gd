@@ -1,5 +1,17 @@
 extends CanvasLayer
 
+# Укажи здесь точный путь к твоему Label, если он отличается
+@onready var item_label = $Panel/ItemLabel 
+
+# Эту функцию мы будем вызывать из player_controller.gd
+func update_equipment_slot(item_name: String):
+	if item_name == "" or item_name == "Empty":
+		item_label.text = "Слот пуст"
+		item_label.modulate.a = 0.5 # Делаем полупрозрачным
+	else:
+		item_label.text = "В руке: " + item_name
+		item_label.modulate.a = 1.0 # Делаем ярким
+
 @onready var score_label: Label = $Control/ScoreLabel
 @onready var tooltip_label: Label = $Control/TooltipLabel
 

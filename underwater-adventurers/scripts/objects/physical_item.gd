@@ -53,18 +53,35 @@ func _on_body_entered(body: Node) -> void:
 	if impact_speed > 3.0:
 		take_damage(impact_speed)
 
-func take_damage(impact_force: float) -> void:
-	if is_broken:
+func take_damage(amount: float) -> void:
+	# Защита от спама урона (кулдаун 500мс)
+	if Time.get_ticks_msec() - last_damage_time < 500:
 		return
 	
 	last_damage_time = Time.get_ticks_msec()
 	
-	var loss = current_value * damage_per_hit
-	current_value -= loss
-	print("⚠️ [УДАР] ", item_name, " повреждён! Сила: ", snapped(impact_force, 1), " Потеряно: ", snapped(loss, 1), " кр. Осталось: ", snapped(current_value, 1), " кр.")
+	# Временно размораживаем предмет для регистрации физического столкновения
+	var was_frozen = freeze
+	if was_frozen:
+		freeze = false
+		# Микро-толчок, чтобы физический движок "проснулся"
+		apply_central_impulse(Vector3.UP * 1.5)
 	
+	# Наносим урон и снижаем стоимость
+	current_value -= amount
+	if current_value < 0:
+		current_value = 0
+	
+	# Возвращаем заморозку, если предмет не был в свободном падении
+	if was_frozen and not is_being_dropped:
+		freeze = true
+		collision_layer = 0
+	
+	# Проверяем, не уничтожен ли предмет
 	if current_value <= 0:
-		_break()
+		print("💥 Предмет уничтожен: ", item_name)
+		# Здесь можно добавить эффект поломки (частицы, звук)
+		queue_free()  # Уничтожаем предмет
 
 func _break() -> void:
 	is_broken = true

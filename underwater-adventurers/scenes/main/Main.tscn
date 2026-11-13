@@ -21,9 +21,8 @@ light_energy = 2.267
 
 [node name="TestRoom" parent="." unique_id=1389855152 instance=ExtResource("1_nha0i")]
 
-[node name="Player" parent="." unique_id=1173662127 node_paths=PackedStringArray("game_ui_reference") instance=ExtResource("2_nha0i")]
+[node name="Player" parent="." unique_id=1173662127 instance=ExtResource("2_nha0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.2050061, 0)
-game_ui_reference = NodePath("../GameUI")
 
 [node name="TestObject" parent="." unique_id=1332988793 instance=ExtResource("3_q24mn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.5, -5)
@@ -43,11 +42,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, -4.5, 9.5)
 [node name="RigidBody3D" parent="." unique_id=255952546 instance=ExtResource("7_sjxhf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -4.5, 5)
 
-[node name="DropZone" parent="." unique_id=1979937504 node_paths=PackedStringArray("game_ui_node") instance=ExtResource("8_ko0rf")]
+[node name="DropZone" parent="." unique_id=1979937504 instance=ExtResource("8_ko0rf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -5, 8)
-game_ui_node = NodePath("../GameUI")
-
-[node name="GameUI" parent="." unique_id=1122234598 instance=ExtResource("9_ostsq")]
 
 [node name="StorageReceiver" parent="." unique_id=451135962 instance=ExtResource("10_3km4f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.386796, -4.9099994, -0.8462522)
@@ -60,3 +56,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1090918, -4.85, 6.2904797)
 
 [node name="HeavyObject" parent="." unique_id=244161260 instance=ExtResource("6_1rhdn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5586777, -4, 3.176158)
+
+[node name="GameUI" parent="." unique_id=1122234598 instance=ExtResource("9_ostsq")]
