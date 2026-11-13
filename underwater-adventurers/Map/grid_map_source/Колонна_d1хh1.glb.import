@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bb37gqv4qrm4d"
-path="res://.godot/imported/Плоскость 40x40.glb-bc2da7bd9636ad69fc9cd587b1decb43.scn"
+uid="uid://bg7j2lpf7e1pk"
+path="res://.godot/imported/Колонна_d1хh1.glb-6cd4c5b54fcc0c58cea7da6561308f18.scn"
 
 [deps]
 
-source_file="res://Map/Плоскость 40x40.glb"
-dest_files=["res://.godot/imported/Плоскость 40x40.glb-bc2da7bd9636ad69fc9cd587b1decb43.scn"]
+source_file="res://Map/grid_map_source/Колонна_d1хh1.glb"
+dest_files=["res://.godot/imported/Колонна_d1хh1.glb-6cd4c5b54fcc0c58cea7da6561308f18.scn"]
 
 [params]
 

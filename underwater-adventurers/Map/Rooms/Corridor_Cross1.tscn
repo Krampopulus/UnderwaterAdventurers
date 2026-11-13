@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://hpxpfick1pfh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5b2w"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqw6p"]
+albedo_color = Color(0.5647059, 0.5647059, 0, 1)
+
+[node name="Коридор крестоврой" type="Node3D" unique_id=845531380]
+
+[node name="Коридор крестоврой" type="CSGBox3D" parent="." unique_id=867642890]
+material_override = SubResource("StandardMaterial3D_c5b2w")
+use_collision = true
+size = Vector3(25, 5, 25)
+material = SubResource("StandardMaterial3D_mqw6p")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Коридор крестоврой" unique_id=350424014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 0, -7.75)
+operation = 2
+size = Vector3(9.5, 5, 9.5)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Коридор крестоврой" unique_id=71831206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 0, -7.75)
+operation = 2
+size = Vector3(9.5, 5, 9.5)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Коридор крестоврой" unique_id=751010379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.75, 0, 7.75)
+operation = 2
+size = Vector3(9.5, 5, 9.5)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Коридор крестоврой" unique_id=1315976676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 0, 7.75)
+operation = 2
+size = Vector3(9.5, 5, 9.5)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Коридор крестоврой" unique_id=1136923718]
+operation = 2
+size = Vector3(5.8, 4.8, 24.8)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Коридор крестоврой" unique_id=1947741464]
+operation = 2
+size = Vector3(24.8, 4.8, 5.8)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Коридор крестоврой" unique_id=1644617800]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -12.5, -0.9, 0)
+operation = 2
+size = Vector3(4, 3, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Коридор крестоврой" unique_id=1057239618]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 12.5)
+operation = 2
+size = Vector3(4, 3, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Коридор крестоврой" unique_id=1802352893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, -12.5)
+operation = 2
+size = Vector3(4, 3, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Коридор крестоврой" unique_id=1005761757]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12.5, -0.9, 0)
+operation = 2
+size = Vector3(4, 3, 1)
+
+[node name="Marker3D" type="Marker3D" parent="Коридор крестоврой" unique_id=371698257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.5)
+
+[node name="Marker3D2" type="Marker3D" parent="Коридор крестоврой" unique_id=1368848424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12.512)
+
+[node name="Marker3D3" type="Marker3D" parent="Коридор крестоврой" unique_id=2135165207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 0)
+
+[node name="Marker3D4" type="Marker3D" parent="Коридор крестоврой" unique_id=1849522060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 0)

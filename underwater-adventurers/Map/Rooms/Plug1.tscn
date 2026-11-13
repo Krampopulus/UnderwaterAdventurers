@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://3nsqakkv2qhu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xd07"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Заглушка" type="Node3D" unique_id=247127937]
+
+[node name="Заглушка" type="CSGBox3D" parent="." unique_id=1351825611]
+use_collision = true
+size = Vector3(0.2, 10, 7)
+material = SubResource("StandardMaterial3D_3xd07")
+
+[node name="Marker3D" type="Marker3D" parent="Заглушка" unique_id=1716313255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)

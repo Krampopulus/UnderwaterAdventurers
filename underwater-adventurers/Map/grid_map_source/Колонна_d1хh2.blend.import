@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dm7k2b5j626hc"
-path="res://.godot/imported/Колонна_d2хh2.blend-d5f440d2a3638c3943548b7e8f1f3c30.scn"
+uid="uid://chpirx35sbb2j"
+path="res://.godot/imported/Колонна_d1хh2.blend-c8e0c9693f9869875e31c2593cc10808.scn"
 
 [deps]
 
-source_file="res://Map/Колонна_d2хh2.blend"
-dest_files=["res://.godot/imported/Колонна_d2хh2.blend-d5f440d2a3638c3943548b7e8f1f3c30.scn"]
+source_file="res://Map/grid_map_source/Колонна_d1хh2.blend"
+dest_files=["res://.godot/imported/Колонна_d1хh2.blend-c8e0c9693f9869875e31c2593cc10808.scn"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bso27iha4tbh6"
-path="res://.godot/imported/Крыша1.glb-4a1e270a1801771c6da9a4058467608a.scn"
+uid="uid://2lb6y1inttmp"
+path="res://.godot/imported/Пол1.glb-91699a1eb3314cce03d92b40a733f417.scn"
 
 [deps]
 
-source_file="res://Map/Крыша1.glb"
-dest_files=["res://.godot/imported/Крыша1.glb-4a1e270a1801771c6da9a4058467608a.scn"]
+source_file="res://Map/grid_map_source/Пол1.glb"
+dest_files=["res://.godot/imported/Пол1.glb-91699a1eb3314cce03d92b40a733f417.scn"]
 
 [params]
 
