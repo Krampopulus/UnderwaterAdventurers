@@ -32,10 +32,34 @@ offset_top = -20.0
 offset_right = 21.0
 offset_bottom = 20.0
 
-[node name="ItemLabel" type="Label" parent="Panel" unique_id=332566493]
+[node name="Slot1" type="Label" parent="Panel" unique_id=1735696659]
 layout_mode = 0
-offset_left = -19.0
-offset_top = 8.0
+offset_left = 11.0
+offset_top = 26.0
 offset_right = 58.0
-offset_bottom = 31.0
-text = "Слот пуст"
+offset_bottom = 49.0
+text = "Пусто"
+
+[node name="Slot2" type="Label" parent="Panel" unique_id=1949939080]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 76.0
+offset_right = 58.0
+offset_bottom = 99.0
+text = "Пусто"
+
+[node name="Slot3" type="Label" parent="Panel" unique_id=131244655]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 126.0
+offset_right = 58.0
+offset_bottom = 149.0
+text = "Пусто"
+
+[node name="Slot4" type="Label" parent="Panel" unique_id=879304389]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 176.0
+offset_right = 58.0
+offset_bottom = 199.0
+text = "Пусто"

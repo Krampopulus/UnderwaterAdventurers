@@ -47,3 +47,5 @@ spot_range = 8.899
 spot_angle = 7.15
 
 [node name="GameUI" parent="." unique_id=1122234598 instance=ExtResource("2_gfjak")]
+
+[node name="InventoryHolder" type="Node3D" parent="." unique_id=1533930507]

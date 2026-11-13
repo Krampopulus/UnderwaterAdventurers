@@ -13,6 +13,8 @@ height = 0.3
 
 [node name="EchoScanner" type="RigidBody3D" unique_id=1095990011]
 script = ExtResource("1_6dh8v")
+item_name = "EchoScanner"
+item_type = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1841093115]
 shape = SubResource("CylinderShape3D_uhb48")

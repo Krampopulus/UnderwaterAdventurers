@@ -10,7 +10,6 @@ extends CharacterBody3D
 @export var max_lift_mass: float = 10.0
 @export var base_throw_force: float = 12.0
 @export var max_charge_time: float = 1.5
-# Ссылка на твой узел GameUI (перетащи его в Инспекторе!)
 @export var game_ui_reference: Node 
 
 @export var min_hold_distance: float = 1.5
@@ -23,11 +22,16 @@ extends CharacterBody3D
 @onready var vacuum_ray: RayCast3D = $Camera3D/VacuumRay
 @onready var flashlight: SpotLight3D = $Camera3D/SpotLight3D
 @onready var grab_beam: MeshInstance3D = $GrabBeam
+@onready var inventory_holder: Node3D = $InventoryHolder # НОВЫЙ УЗЕЛ
 
 var held_object: RigidBody3D = null
 var equipped_item: RigidBody3D = null
 var current_charge_time: float = 0.0
 var is_charging_throw: bool = false
+
+# --- НОВЫЙ ИНВЕНТАРЬ ---
+var inventory: Array = [null, null, null, null] # 4 слота рюкзака
+var selected_slot: int = 0 # Активный слот (0, 1, 2 или 3)
 
 func _ready() -> void:
 	if not camera:
@@ -36,43 +40,27 @@ func _ready() -> void:
 				camera = child
 				break
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	# Скрываем луч при старте
-	if grab_beam:
-		grab_beam.visible = false
+	if grab_beam: grab_beam.visible = false
+	_update_ui() # Обновить UI при старте
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	# Визуализация луча
 	if grab_beam and held_object != null:
 		grab_beam.visible = true
-		
 		var distance = global_position.distance_to(held_object.global_position)
-		
-		# 1. Растягиваем луч
 		grab_beam.scale.y = distance / 2.0
-		
-		# 2. Пульсация толщины (эффект "дыхания" энергии)
 		var pulse = 1.0 + sin(Time.get_ticks_msec() * 0.01) * 0.15
 		grab_beam.scale.x = pulse
 		grab_beam.scale.z = pulse
-		
-		# 3. Помещаем середину луча между игроком и предметом
 		grab_beam.global_position = global_position.lerp(held_object.global_position, 0.5)
-		
-		# 4. Поворачиваем луч в сторону предмета
 		grab_beam.look_at(held_object.global_position, Vector3.UP)
-		
-		# 5. Поворот цилиндра на 90° по X, чтобы высота шла вдоль луча
 		grab_beam.rotate_x(deg_to_rad(90))
-		
-		# 6. Лёгкое дрожание (эффект нестабильной энергии)
 		grab_beam.rotate_z(sin(Time.get_ticks_msec() * 0.02) * 0.05)
 	else:
-		if grab_beam:
-			grab_beam.visible = false
+		if grab_beam: grab_beam.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_multiplayer_authority():
-		return
+	if not is_multiplayer_authority(): return
 
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)
@@ -83,10 +71,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if held_object == null:
-			try_grab_object()
-		else:
-			release_held_object()
+		if held_object == null: try_grab_object()
+		else: release_held_object()
 
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
@@ -94,38 +80,115 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			current_hold_distance = clamp(current_hold_distance + zoom_speed, min_hold_distance, max_hold_distance)
 
-	# КЛАВИША E: Экипировка / Использование
-	if event.is_action_pressed("interact"):
-		if held_object != null and held_object.has_method("handle_interact"):
-			var item_to_equip = held_object
-			release_held_object()
-			item_to_equip.handle_interact(self)
-			equipped_item = item_to_equip
-			
-			# --- ОБНОВЛЕНИЕ UI ---
-			var item_name = item_to_equip.get("item_name") if item_to_equip.has_method("get") and "item_name" in item_to_equip else item_to_equip.name
-			_update_ui_slot(item_name)
-			
-		elif equipped_item != null and equipped_item.has_method("handle_interact"):
-			equipped_item.handle_interact(self)
+	# --- УПРАВЛЕНИЕ ИНВЕНТАРЕМ (1, 2, 3, 4) ---
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_1: selected_slot = 0; _update_ui()
+		elif event.keycode == KEY_2: selected_slot = 1; _update_ui()
+		elif event.keycode == KEY_3: selected_slot = 2; _update_ui()
+		elif event.keycode == KEY_4: selected_slot = 3; _update_ui()
 
-	# КЛАВИША Q: Снять снаряжение из слота
+	# --- КЛАВИША E: ОБМЕН МЕЖДУ РУКОЙ И СЛОТОМ ---
+	if event.is_action_pressed("interact"):
+		_swap_item_with_slot()
+
+	# КЛАВИША Q: Выбросить из руки
 	if event.is_action_pressed("drop_equipment"):
 		if equipped_item != null and equipped_item.has_method("handle_drop"):
 			equipped_item.handle_drop(self)
-			
-			# --- ОБНОВЛЕНИЕ UI ---
-			_update_ui_slot("")
-			
 			equipped_item = null
+			_update_ui()
 
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F:
 		toggle_flashlight()
 
-func _physics_process(delta: float) -> void:
-	if not camera:
-		return
+# --- ЛОГИКА ОБМЕНА ПРЕДМЕТАМИ ---
+func _swap_item_with_slot() -> void:
+    var slot_item = inventory[selected_slot]
+    
+    if held_object == null and equipped_item == null and slot_item != null:
+        var item_to_take = slot_item
+        inventory[selected_slot] = null
+        
+        if item_to_take.has_method("equip"):
+            item_to_take.equip(self)
+            equipped_item = item_to_take
+            print("⚡ Экипировано из слота: ", item_to_take.name)
+        else:
+            held_object = item_to_take
+            _restore_item_physics(held_object)
+            held_object.add_collision_exception_with(self)
+            print("🎒 Достали в манипулятор: ", held_object.name)
+    
+    elif held_object != null and slot_item == null:
+        var item_to_store = held_object
+        release_held_object()
+        inventory[selected_slot] = item_to_store
+        _hide_item_in_inventory(item_to_store)
+        print("🎒 Положили в слот ", selected_slot + 1)
+    
+    elif held_object != null and slot_item != null:
+        var item_from_hand = held_object
+        var item_from_slot = slot_item
+        release_held_object()
+        _hide_item_in_inventory(item_from_hand)
+        inventory[selected_slot] = item_from_hand
+        
+        if item_from_slot.has_method("equip"):
+            item_from_slot.equip(self)
+            equipped_item = item_from_slot
+            print("⚡ Экипировано из слота (обмен)")
+        else:
+            held_object = item_from_slot
+            _restore_item_physics(held_object)
+            held_object.add_collision_exception_with(self)
+            print("🔄 Достали в манипулятор (обмен)")
+    
+    _update_ui()
 
+# Вспомогательные функции для "прятания" предметов
+func _hide_item_in_inventory(item: RigidBody3D) -> void:
+	if item == null:
+		print("⚠️ Попытка спрятать null-предмет!")
+		return
+	item.visible = false
+	item.freeze = true
+	item.collision_layer = 0
+	item.collision_mask = 0
+	# Перемещаем в контейнер, сохраняя глобальную позицию
+	item.reparent(inventory_holder)
+	item.position = Vector3.ZERO
+
+func _restore_item_physics(item: RigidBody3D) -> void:
+	if item == null:
+		print("⚠️ Попытка восстановить null-предмет!")
+		return
+	
+	item.visible = true
+	item.freeze = false
+	item.collision_layer = 1
+	item.collision_mask = 1
+	
+	# Возвращаем в мир
+	item.reparent(get_tree().root)
+	
+	# Позиционируем ПРЯМО ПЕРЕД КАМЕРОЙ (на расстоянии захвата)
+	item.global_position = camera.global_position + camera.global_basis.z * (-current_hold_distance)
+	item.global_rotation = Vector3.ZERO
+	
+	# Сбрасываем скорость
+	item.linear_velocity = Vector3.ZERO
+	item.angular_velocity = Vector3.ZERO
+	
+	# Добавляем исключение коллизии с игроком
+	item.add_collision_exception_with(self)
+	
+	# ВАЖНО: сразу делаем предмет "held_object", чтобы не сработал обрыв троса
+	held_object = item
+	
+	print("✅ Предмет восстановлен и захвачен: ", item.name)
+
+func _physics_process(delta: float) -> void:
+	if not camera: return
 	check_raycast_tooltip()
 
 	if held_object != null:
@@ -134,7 +197,7 @@ func _physics_process(delta: float) -> void:
 		var distance = to_target.length()
 		
 		if distance > 3.5:
-			print("⛓️ [ОБРЫВ] Трос натянут слишком сильно. Предмет отпущен.")
+			print("⛓️ [ОБРЫВ] Трос натянут слишком сильно.")
 			release_held_object()
 			return
 		
@@ -143,21 +206,12 @@ func _physics_process(delta: float) -> void:
 			held_object.angular_damp = 5.0
 			held_object.linear_velocity = to_target * 10.0
 		else:
-			# --- ИСПРАВЛЕНИЕ: ТЯЖЕЛЫЙ ПРЕДМЕТ (РЕЖИМ БУКСИРА) ---
 			held_object.freeze = false
 			held_object.angular_damp = 10.0
-			
-			# Запрет на подъем вверх (гасим положительную вертикальную скорость)
-			if held_object.linear_velocity.y > 0.0:
-				held_object.linear_velocity.y = 0.0
-				
-			# Вектор к игроку с небольшим подъемом (0.3), чтобы перекатываться через неровности пола
+			if held_object.linear_velocity.y > 0.0: held_object.linear_velocity.y = 0.0
 			var direction_to_player = (global_position - held_object.global_position).normalized()
 			direction_to_player.y = 0.3 
-			
-			# Сила тяги зависит от массы
-			var tow_force = 15.0 * held_object.mass
-			held_object.apply_central_force(direction_to_player * tow_force)
+			held_object.apply_central_force(direction_to_player * 15.0 * held_object.mass)
 		
 		handle_throw_logic(delta)
 
@@ -185,52 +239,28 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func try_grab_object() -> void:
-	print("🔍 Пытаюсь захватить предмет...")
-	
-	if vacuum_ray == null:
-		print("❌ vacuum_ray = null!")
-		return
-	
-	# ДОБАВЬ ЭТУ СТРОКУ:
-	print("📡 Позиция луча: ", vacuum_ray.global_position, " | Направление: ", vacuum_ray.target_position)
-	
-	if not vacuum_ray.is_colliding():
-		print("❌ Луч не попадает. Длина луча: ", vacuum_ray.target_position)
-		return
-	
-	var collider = vacuum_ray.get_collider()
-	print("✅ Луч попал в: ", collider.name)
-	
-	# ... остальной код
-	if collider is RigidBody3D:
-		print("📦 Это RigidBody3D, проверяю can_grab()...")
-		var is_grabbable = true
-		if collider.has_method("can_grab"):
-			is_grabbable = collider.can_grab()
-			print("can_grab() вернул: ", is_grabbable)
-		
-		if is_grabbable:
-			held_object = collider
-			held_object.add_collision_exception_with(self)
-			print("✅ Захвачен: ", held_object.name)
-			if held_object.has_method("on_grabbed"):
-				held_object.on_grabbed()
+	if vacuum_ray.is_colliding():
+		var collider = vacuum_ray.get_collider()
+		if collider is RigidBody3D:
+			var is_grabbable = true
+			if collider.has_method("can_grab"): is_grabbable = collider.can_grab()
+			if is_grabbable:
+				held_object = collider
+				held_object.add_collision_exception_with(self)
+				if held_object.has_method("on_grabbed"): held_object.on_grabbed()
 
 func release_held_object() -> void:
 	if held_object != null:
 		held_object.remove_collision_exception_with(self)
 		held_object.freeze = false
 		held_object.angular_damp = 0.1
-		
-		if held_object.has_method("on_released"):
-			held_object.on_released()
-			
+		if held_object.has_method("on_released"): held_object.on_released()
 		held_object = null
 		is_charging_throw = false
 		current_charge_time = 0.0
 
 func check_raycast_tooltip() -> void:
-	if held_object == null and equipped_item == null and vacuum_ray.is_colliding():
+	if held_object == null and vacuum_ray.is_colliding():
 		var collider = vacuum_ray.get_collider()
 		if collider and collider.has_method("get_perceived_range"):
 			var item_name = collider.get("item_name") if "item_name" in collider else "Неизвестный предмет"
@@ -241,13 +271,11 @@ func check_raycast_tooltip() -> void:
 		game_ui_reference.hide_item_tooltip()
 
 func toggle_flashlight() -> void:
-	if flashlight:
-		flashlight.visible = not flashlight.visible
+	if flashlight: flashlight.visible = not flashlight.visible
 
 func handle_throw_logic(delta: float) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		if held_object != null and held_object.mass > max_lift_mass:
-			return
+		if held_object != null and held_object.mass > max_lift_mass: return
 		if not is_charging_throw:
 			is_charging_throw = true
 			current_charge_time = 0.0
@@ -263,14 +291,11 @@ func execute_throw() -> void:
 	var final_impulse = throw_dir * base_throw_force * (1.0 + charge_factor * 1.5) * item_weight
 	
 	held_object.freeze = false
-	if held_object.has_method("on_thrown"):
-		held_object.on_thrown(final_impulse)
-	else:
-		held_object.apply_central_impulse(final_impulse)
-		
+	if held_object.has_method("on_thrown"): held_object.on_thrown(final_impulse)
+	else: held_object.apply_central_impulse(final_impulse)
 	release_held_object()
 
-# --- ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ДЛЯ UI ---
-func _update_ui_slot(item_name: String) -> void:
-	if game_ui_reference and game_ui_reference.has_method("update_equipment_slot"):
-		game_ui_reference.update_equipment_slot(item_name)
+# --- ОБНОВЛЕНИЕ UI ---
+func _update_ui() -> void:
+	if game_ui_reference and game_ui_reference.has_method("update_inventory_ui"):
+		game_ui_reference.update_inventory_ui(inventory, selected_slot)
