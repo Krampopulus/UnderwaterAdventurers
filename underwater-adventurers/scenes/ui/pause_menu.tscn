@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://djyt4h8on4hc6"]
+
+[ext_resource type="Script" uid="uid://gh1u0q6mb7t3" path="res://scenes/menu/pause_menu.gd" id="1_n54lc"]
+
+[sub_resource type="Theme" id="Theme_ldju7"]
+
+[node name="PauseMenu" type="Control" unique_id=1584569504]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n54lc")
+
+[node name="Panel" type="Panel" parent="." unique_id=1008874416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ldju7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=573422955]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ResumeButton" type="Button" parent="Panel/VBoxContainer" unique_id=393383215]
+layout_mode = 2
+text = "Продолжить"
+
+[node name="RestartButton" type="Button" parent="Panel/VBoxContainer" unique_id=11577888]
+layout_mode = 2
+text = "Повторное погружение"
+
+[node name="QuitButton" type="Button" parent="Panel/VBoxContainer" unique_id=1266816517]
+layout_mode = 2
+text = "Покинуть экспедицию"

@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dugmbw74vagir" path="res://prefabs/зона_лута.tscn" id="10_3km4f"]
 [ext_resource type="PackedScene" uid="uid://3ky1lxi0lw5g" path="res://scenes/tools/flashlight.tscn" id="11_qkm1d"]
 [ext_resource type="PackedScene" uid="uid://dg3rvcjdadxgn" path="res://scenes/tools/echo_scanner.tscn" id="12_p5fgu"]
+[ext_resource type="PackedScene" uid="uid://djyt4h8on4hc6" path="res://scenes/menu/pause_menu.tscn" id="13_2tpxt"]
 
 [node name="Main" type="Node3D" unique_id=1929859359]
 
@@ -59,3 +60,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1090918, -4.85, 6.2904797)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5586777, -4, 3.176158)
 
 [node name="GameUI" parent="." unique_id=1122234598 instance=ExtResource("9_ostsq")]
+
+[node name="PauseMenu" parent="." unique_id=1584569504 instance=ExtResource("13_2tpxt")]
