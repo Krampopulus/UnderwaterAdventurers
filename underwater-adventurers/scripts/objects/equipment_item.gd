@@ -1,8 +1,8 @@
 extends "res://scripts/objects/physical_item.gd"
 
-   @export var item_name: String = "Фонарь"
 
-@onready var light_node: SpotLight3D = $Flashlight
+
+var light_node: SpotLight3D = null
 
 var is_equipped: bool = false
 var original_parent: Node3D
@@ -13,8 +13,13 @@ func _ready() -> void:
     self.can_be_grabbed = true
     self.base_value = 0.0
     self.current_value = 0.0
-    self.fragility = 1.0  # Снаряжение НЕ ломается
+    self.fragility = 1.0
     
+    # Безопасный поиск света среди дочерних узлов
+    for child in get_children():
+        if child is SpotLight3D:
+            light_node = child
+            break
     
     original_parent = get_parent()
     
@@ -32,6 +37,7 @@ func handle_drop(player: CharacterBody3D) -> void:
         unequip(player)
 
 func equip(player: CharacterBody3D) -> void:
+    self.visible = true
     is_equipped = true
     
     self.freeze = true
@@ -54,6 +60,7 @@ func unequip(player: CharacterBody3D) -> void:
     if not is_equipped:
         return
         
+    self.visible = true
     is_equipped = false
     if light_node:
         light_node.visible = false
@@ -75,6 +82,8 @@ func unequip(player: CharacterBody3D) -> void:
         call_deferred("_reset_drop_protection")
         
     print("🔦 [СНАРЯЖЕНИЕ] Выброшено: ", item_name)
+
+
 
 func _reset_drop_protection() -> void:
     await get_tree().create_timer(0.5).timeout

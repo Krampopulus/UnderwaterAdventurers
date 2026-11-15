@@ -21,8 +21,9 @@ light_energy = 2.267
 
 [node name="TestRoom" parent="." unique_id=1389855152 instance=ExtResource("1_nha0i")]
 
-[node name="Player" parent="." unique_id=1173662127 instance=ExtResource("2_nha0i")]
+[node name="Player" parent="." unique_id=1173662127 node_paths=PackedStringArray("game_ui_reference") instance=ExtResource("2_nha0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.2050061, 0)
+game_ui_reference = NodePath("../GameUI")
 
 [node name="TestObject" parent="." unique_id=1332988793 instance=ExtResource("3_q24mn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.5, -5)
