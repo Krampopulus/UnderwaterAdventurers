@@ -18,12 +18,15 @@ func _ready() -> void:
     quit_button.pressed.connect(_on_quit_pressed)
 
 func _input(event: InputEvent) -> void:
-    # Ловим нажатие Esc (стандартное действие ui_cancel)
     if event.is_action_pressed("ui_cancel"):
         if get_tree().paused:
-            _on_resume_pressed() # Если пауза активна — снимаем её
+            _on_resume_pressed()
         else:
-            _pause_game()        # Если паузы нет — включаем её
+            _pause_game()
+        
+        # КРИТИЧНО: Сообщаем движку, что мы обработали это нажатие.
+        # Это блокирует передачу события в player_controller.gd и предотвращает конфликт режимов мыши.
+        get_viewport().set_input_as_handled()
 
 func _pause_game() -> void:
     get_tree().paused = true
