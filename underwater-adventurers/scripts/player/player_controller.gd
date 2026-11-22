@@ -32,6 +32,8 @@ var inventory: Array = [null, null, null, null]
 var selected_slot: int = 0
 
 func _ready() -> void:
+	add_to_group("player")
+	print("✅ Игрок добавлен в группу 'player'")
 	if not camera:
 		for child in get_children():
 			if child is Camera3D:

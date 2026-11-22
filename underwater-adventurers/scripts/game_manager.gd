@@ -1,30 +1,44 @@
 extends Node
 
-# Вот эта строка создает поле в инспекторе Godot:
-@export var danger_zone_node: Area3D
+# Сигналы для обновления интерфейса (UI)
+signal credits_changed(new_amount: int)
+signal expedition_failed(lost_value: int)
 
-static var total_lost_value: float = 0.0
+# Глобальные переменные
+var credits: int = 0
+var current_expedition_value: int = 0 # Стоимость лута, который игрок несёт прямо сейчас
 
 func _ready() -> void:
-	if danger_zone_node:
-		# Подключаем сигнал пересечения зоны
-		danger_zone_node.body_entered.connect(_on_danger_zone_entered)
-	else:
-		print("⚠️ [GameManager] Внимание: не назначена Danger Zone Node в инспекторе!")
+	print("✅ [GameManager] Загружен и готов к работе.")
+	# В будущем здесь будет загрузка credits из файла сохранения
 
-func _unhandled_input(event: InputEvent) -> void:
-	# Debug-клавиша K (работает только в debug-сборке из редактора)
-	if OS.is_debug_build() and event is InputEventKey and event.pressed and event.keycode == KEY_K:
-		trigger_player_death("DEBUG: Принудительный сброс по клавише K")
+# --- ЭКОНОМИКА ---
+func add_credits(amount: int) -> void:
+	credits += amount
+	credits_changed.emit(credits)
+	print("💰 Получено: ", amount, ". Всего на счету: ", credits)
 
-func _on_danger_zone_entered(body: Node3D) -> void:
-	# Проверяем, что в зону вошел именно игрок
-	if body is CharacterBody3D:
-		trigger_player_death("Вход в тестовую опасную зону")
+func add_to_expedition_value(amount: int) -> void:
+	current_expedition_value += amount
 
+func clear_expedition_value() -> void:
+	current_expedition_value = 0
+
+# --- СМЕРТЬ И ПЕРЕЗАПУСК ---
 func trigger_player_death(reason: String) -> void:
 	print("☠️ [СМЕРТЬ] Экспедиция провалена! Причина: ", reason)
-	total_lost_value = 350.0 # Фиксация потерянного лута
+	print("💸 Потеряно лута на сумму: ", current_expedition_value)
+	
+	# Сообщаем UI, чтобы он показал экран потерь (если нужно)
+	expedition_failed.emit(current_expedition_value)
+	
+	# Сбрасываем значение текущей экспедиции перед перезапуском
+	current_expedition_value = 0
 	
 	# Перезапуск текущей сцены
 	get_tree().reload_current_scene()
+
+# --- DEBUG ---
+func _unhandled_input(event: InputEvent) -> void:
+	if OS.is_debug_build() and event is InputEventKey and event.pressed and event.keycode == KEY_K:
+		trigger_player_death("DEBUG: Принудительный сброс по клавише K")
