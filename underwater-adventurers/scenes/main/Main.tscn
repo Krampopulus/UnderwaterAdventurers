@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://3ky1lxi0lw5g" path="res://scenes/tools/flashlight.tscn" id="11_qkm1d"]
 [ext_resource type="PackedScene" uid="uid://coc0ghlmw0maj" path="res://Map/Map2.tscn" id="12_2tpxt"]
 [ext_resource type="PackedScene" uid="uid://dg3rvcjdadxgn" path="res://scenes/tools/echo_scanner.tscn" id="12_p5fgu"]
+[ext_resource type="PackedScene" uid="uid://djyt4h8on4hc6" path="res://scenes/menu/pause_menu.tscn" id="13_2tpxt"]
 
 [node name="Main" type="Node3D" unique_id=1929859359]
 
@@ -19,8 +20,15 @@
 transform = Transform3D(0.88756645, 0.096590675, -0.45043993, 0.45803863, -0.080477335, 0.8852819, 0.04925977, -0.99206537, -0.11567123, 0, 8.963509, 0)
 light_energy = 2.267
 
+<<<<<<< HEAD
 [node name="Player" parent="." unique_id=1173662127 instance=ExtResource("2_nha0i")]
+=======
+[node name="TestRoom" parent="." unique_id=1389855152 instance=ExtResource("1_nha0i")]
+
+[node name="Player" parent="." unique_id=1173662127 node_paths=PackedStringArray("game_ui_reference") instance=ExtResource("2_nha0i")]
+>>>>>>> 8681733215c881c5d49fa3cc2c0c6d608851e8fb
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.2050061, 0)
+game_ui_reference = NodePath("../GameUI")
 
 [node name="TestObject" parent="." unique_id=1332988793 instance=ExtResource("3_q24mn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.05901, -4.3801565, -35.23767)
@@ -57,4 +65,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -4, 3)
 
 [node name="GameUI" parent="." unique_id=1122234598 instance=ExtResource("9_ostsq")]
 
+<<<<<<< HEAD
 [node name="Прототип карты" parent="." unique_id=2143112266 instance=ExtResource("12_2tpxt")]
+=======
+[node name="PauseMenu" parent="." unique_id=1584569504 instance=ExtResource("13_2tpxt")]
+>>>>>>> 8681733215c881c5d49fa3cc2c0c6d608851e8fb
