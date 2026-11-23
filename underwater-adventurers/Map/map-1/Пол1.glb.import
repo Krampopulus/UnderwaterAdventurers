@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d3swhuch6ktrl"
-path="res://.godot/imported/Пол1.glb-c2621321e7b4525aae95f1bd065cb9a5.scn"
+path="res://.godot/imported/Пол1.glb-cd99877c7cc42bcef6ee221376add4d9.scn"
 
 [deps]
 
-source_file="res://Пол1.glb"
-dest_files=["res://.godot/imported/Пол1.glb-c2621321e7b4525aae95f1bd065cb9a5.scn"]
+source_file="res://Map/map-1/Пол1.glb"
+dest_files=["res://.godot/imported/Пол1.glb-cd99877c7cc42bcef6ee221376add4d9.scn"]
 
 [params]
 

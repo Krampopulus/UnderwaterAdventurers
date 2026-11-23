@@ -17,12 +17,21 @@ boot_splash/bg_color=Color(0.058266275, 0.14855242, 0.22641972, 1)
 boot_splash/image="uid://dkkrqm3hbw80l"
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://scripts/game_manager.gd"
+GameConfig="*res://scripts/game_config.gd"
+
 [display]
 
 window/size/viewport_width=1540
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [filesystem]
 

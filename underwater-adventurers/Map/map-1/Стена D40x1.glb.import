@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b8g4ouoymfk7s"
-path="res://.godot/imported/Стена D40x1.glb-cae24e5ab5a5d6ee3dcb6ae398bfe7eb.scn"
+path="res://.godot/imported/Стена D40x1.glb-f5793f59dd374c297cb69678964d98a3.scn"
 
 [deps]
 
-source_file="res://Стена D40x1.glb"
-dest_files=["res://.godot/imported/Стена D40x1.glb-cae24e5ab5a5d6ee3dcb6ae398bfe7eb.scn"]
+source_file="res://Map/map-1/Стена D40x1.glb"
+dest_files=["res://.godot/imported/Стена D40x1.glb-f5793f59dd374c297cb69678964d98a3.scn"]
 
 [params]
 

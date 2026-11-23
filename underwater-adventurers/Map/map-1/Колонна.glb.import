@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://2uwhujqtsdv"
-path="res://.godot/imported/Колонна.glb-8991ce1dd1ac7986226f66778215a6d3.scn"
+path="res://.godot/imported/Колонна.glb-9e2600c85fe303341e9aef9a14ca7905.scn"
 
 [deps]
 
-source_file="res://Колонна.glb"
-dest_files=["res://.godot/imported/Колонна.glb-8991ce1dd1ac7986226f66778215a6d3.scn"]
+source_file="res://Map/map-1/Колонна.glb"
+dest_files=["res://.godot/imported/Колонна.glb-9e2600c85fe303341e9aef9a14ca7905.scn"]
 
 [params]
 

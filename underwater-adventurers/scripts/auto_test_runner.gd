@@ -8,24 +8,19 @@ func run_all_tests() -> void:
 	print("\n================ ЗАПУСК АВТО-ТЕСТОВ СИСТЕМЫ ================")
 	
 	var passed_count = 0
-	var total_tests = 4
+	var tests_to_run = [
+		test_game_config,
+		test_storage_receiver_scene,
+		test_drop_zone_scene,
+		test_equipment_script_exists # Переименовано для честности
+	]
 	
-	# Тест 1: Проверка JSON-конфигурации
-	if test_game_config():
-		passed_count += 1
-		
-	# Тест 2: Проверка сцены тележки (StorageReceiver)
-	if test_storage_receiver_scene():
-		passed_count += 1
-		
-	# Тест 3: Проверка сцены шлюза (DropZone)
-	if test_drop_zone_scene():
-		passed_count += 1
-		
-	# Тест 4: Интеграционная проверка логики запрета сдачи снаряжения
-	if test_equipment_restrictions():
-		passed_count += 1
-		
+	var total_tests = tests_to_run.size()
+	
+	for test_func in tests_to_run:
+		if test_func.call():
+			passed_count += 1
+			
 	print("\n================ ИТОГИ ТЕСТИРОВАНИЯ ================")
 	print("Пройдено тестов: ", passed_count, " из ", total_tests)
 	if passed_count == total_tests:
@@ -49,25 +44,24 @@ func test_storage_receiver_scene() -> bool:
 	var scene_path = "res://storage_receiver.tscn"
 	if not ResourceLoader.exists(scene_path):
 		push_warning("  -> Пропущено: Файл сцены тележки не найден по пути " + scene_path)
-		return true # Не фатально, если сцена еще не сохранена отдельно
+		return true
 		
 	var scene = load(scene_path)
 	var instance = scene.instantiate()
+	add_child(instance) # ВАЖНО: Добавляем в дерево для корректной работы _ready и queue_free
 	
 	var is_valid = true
 	if not (instance is RigidBody3D):
-		push_error("  -> ОШИБКА: Корневой узел StorageReceiver должен быть RigidBody3D[cite: 3]!")
+		push_error("  -> ОШИБКА: Корневой узел StorageReceiver должен быть RigidBody3D!")
 		is_valid = false
 	if not instance.has_node("PlayerDetector"):
-		push_error("  -> ОШИБКА: У тележки отсутствует обязательный узел PlayerDetector[cite: 3].")
+		push_error("  -> ОШИБКА: У тележки отсутствует обязательный узел PlayerDetector.")
 		is_valid = false
 	if not instance.has_node("CargoArea"):
-		push_error("  -> ОШИБКА: У тележки отсутствует внутренняя зона CargoArea[cite: 3].")
+		push_error("  -> ОШИБКА: У тележки отсутствует внутренняя зона CargoArea.")
 		is_valid = false
 		
-	instance.queue_free()
-	if is_valid:
-		print("  -> Успех: Структура нод тележки[cite: 3] полностью корректна.")
+	instance.queue_free() # Теперь работает корректно
 	return is_valid
 
 func test_drop_zone_scene() -> bool:
@@ -79,20 +73,18 @@ func test_drop_zone_scene() -> bool:
 		
 	var scene = load(scene_path)
 	var instance = scene.instantiate()
+	add_child(instance)
 	
 	var is_valid = true
 	if not (instance is Area3D):
-		push_error("  -> ОШИБКА: Корневой узел DropZone должен быть Area3D[cite: 5]!")
+		push_error("  -> ОШИБКА: Корневой узел DropZone должен быть Area3D!")
 		is_valid = false
 		
 	instance.queue_free()
-	if is_valid:
-		print("  -> Успех: Структура шлюза[cite: 5] валидна.")
 	return is_valid
 
-func test_equipment_restrictions() -> bool:
-	print("\n[ТЕСТ 4] Проверка логических ограничений снаряжения...")
-	# Проверяем, что классы снаряжения существуют и доступны для проверки типов
+func test_equipment_script_exists() -> bool:
+	print("\n[ТЕСТ 4] Проверка наличия скрипта снаряжения...")
 	var flashlight_script = load("res://flashlight_item.gd")
 	if flashlight_script:
 		print("  -> Успех: Класс FlashlightItem успешно обнаружен.")

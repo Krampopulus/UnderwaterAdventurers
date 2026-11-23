@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://sh0i5cqu3san"
-path="res://.godot/imported/Плоскость 40x40.glb-f767a7b4872ac7878d81245230086131.scn"
+path="res://.godot/imported/Плоскость 40x40.glb-b40ff8ca7dcd0b8cce21ce85c92fe87a.scn"
 
 [deps]
 
-source_file="res://Плоскость 40x40.glb"
-dest_files=["res://.godot/imported/Плоскость 40x40.glb-f767a7b4872ac7878d81245230086131.scn"]
+source_file="res://Map/map-1/Плоскость 40x40.glb"
+dest_files=["res://.godot/imported/Плоскость 40x40.glb-b40ff8ca7dcd0b8cce21ce85c92fe87a.scn"]
 
 [params]
 

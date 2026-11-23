@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://du444xbxwog4f"
-path="res://.godot/imported/Крыша1.glb-ddcfffcd26a41dd3853865f2089cceee.scn"
+path="res://.godot/imported/Крыша1.glb-22b308660395859a4490286ba5d53d40.scn"
 
 [deps]
 
-source_file="res://Крыша1.glb"
-dest_files=["res://.godot/imported/Крыша1.glb-ddcfffcd26a41dd3853865f2089cceee.scn"]
+source_file="res://Map/map-1/Крыша1.glb"
+dest_files=["res://.godot/imported/Крыша1.glb-22b308660395859a4490286ba5d53d40.scn"]
 
 [params]
 
