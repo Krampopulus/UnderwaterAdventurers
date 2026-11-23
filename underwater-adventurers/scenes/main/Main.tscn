@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cq4es4e280n26"]
 
-[ext_resource type="PackedScene" uid="uid://dm5wf5n40xvx5" path="res://scenes/environment/TestRoom.tscn" id="1_nha0i"]
 [ext_resource type="PackedScene" uid="uid://dff2qaebbt7dt" path="res://scenes/player/Player.tscn" id="2_nha0i"]
 [ext_resource type="PackedScene" uid="uid://c2tpg6unpbu3v" path="res://scenes/objects/TestObject.tscn" id="3_q24mn"]
 [ext_resource type="PackedScene" uid="uid://diixfu1rk31ks" path="res://scenes/objects/TestCylinder.tscn" id="4_dc040"]
@@ -11,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bgnexoh0y2h22" path="res://scenes/tools/game_ui.tscn" id="9_ostsq"]
 [ext_resource type="PackedScene" uid="uid://dugmbw74vagir" path="res://prefabs/зона_лута.tscn" id="10_3km4f"]
 [ext_resource type="PackedScene" uid="uid://3ky1lxi0lw5g" path="res://scenes/tools/flashlight.tscn" id="11_qkm1d"]
+[ext_resource type="PackedScene" uid="uid://coc0ghlmw0maj" path="res://Map/Map2.tscn" id="12_2tpxt"]
 [ext_resource type="PackedScene" uid="uid://dg3rvcjdadxgn" path="res://scenes/tools/echo_scanner.tscn" id="12_p5fgu"]
 
 [node name="Main" type="Node3D" unique_id=1929859359]
@@ -19,42 +19,42 @@
 transform = Transform3D(0.88756645, 0.096590675, -0.45043993, 0.45803863, -0.080477335, 0.8852819, 0.04925977, -0.99206537, -0.11567123, 0, 8.963509, 0)
 light_energy = 2.267
 
-[node name="TestRoom" parent="." unique_id=1389855152 instance=ExtResource("1_nha0i")]
-
 [node name="Player" parent="." unique_id=1173662127 instance=ExtResource("2_nha0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.2050061, 0)
 
 [node name="TestObject" parent="." unique_id=1332988793 instance=ExtResource("3_q24mn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.5, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.05901, -4.3801565, -35.23767)
 
 [node name="TestObject2" parent="." unique_id=2109841549 instance=ExtResource("3_q24mn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -4.5, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -4.3, 4)
 
 [node name="TestCylinder" parent="." unique_id=1437208872 instance=ExtResource("4_dc040")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2, -4, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, -3.9, -25.69)
 
 [node name="TestSphere" parent="." unique_id=1581645196 instance=ExtResource("5_1rhdn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, -4.5, 8.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.124516, -4.5, -26.691483)
 
 [node name="TestSphere2" parent="." unique_id=840072376 instance=ExtResource("5_1rhdn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, -4.5, 9.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, -4.4, 9.5)
 
 [node name="RigidBody3D" parent="." unique_id=255952546 instance=ExtResource("7_sjxhf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -4.5, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, -4.5, -43.25)
 
 [node name="DropZone" parent="." unique_id=1979937504 instance=ExtResource("8_ko0rf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -5, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.8, -8)
 
 [node name="StorageReceiver" parent="." unique_id=451135962 instance=ExtResource("10_3km4f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.386796, -4.9099994, -0.8462522)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -4.8, -1.5)
 
 [node name="Flashlight" parent="." unique_id=275641190 instance=ExtResource("11_qkm1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0243797, -4.7279763, 2.7536955)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7, -4.7, -9.1)
 
 [node name="EchoScanner" parent="." unique_id=1095990011 instance=ExtResource("12_p5fgu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1090918, -4.85, 6.2904797)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55, -4.75, -9.1)
 
 [node name="HeavyObject" parent="." unique_id=244161260 instance=ExtResource("6_1rhdn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5586777, -4, 3.176158)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -4, 3)
 
 [node name="GameUI" parent="." unique_id=1122234598 instance=ExtResource("9_ostsq")]
+
+[node name="Прототип карты" parent="." unique_id=2143112266 instance=ExtResource("12_2tpxt")]

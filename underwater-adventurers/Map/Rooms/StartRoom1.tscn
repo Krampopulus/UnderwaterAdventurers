@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://04tb6qq0oj12"]
 
-[ext_resource type="PackedScene" uid="uid://baorxqjhcl5lx" path="res://scenes/objects/drop_zone.tscn" id="1_78c1j"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onhxh"]
 albedo_color = Color(0, 0.60120547, 0, 1)
 
@@ -24,6 +22,3 @@ size = Vector3(4, 3, 1)
 
 [node name="Marker3D" type="Marker3D" parent="Стартовая комната(1)" unique_id=1160847516]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -2.5, -10)
-
-[node name="DropZone" parent="Стартовая комната(1)" unique_id=1979937504 instance=ExtResource("1_78c1j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.8, -8)
